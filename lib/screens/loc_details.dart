@@ -17,7 +17,6 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // Helper: floor suffix (1st, 2nd, etc.)
   String _getFloorSuffix(int floor) {
     if (floor == 1) return 'st';
     if (floor == 2) return 'nd';
@@ -25,7 +24,7 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
     return 'th';
   }
 
-  // Helper: build star icons
+
   List<Widget> _buildStars(double rating, double iconSize) {
     final int full = rating.floor();
     final bool half = (rating - full) >= 0.5;
@@ -44,7 +43,6 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
     return list;
   }
 
-  // Helper: small info chips
   Widget _buildInfoChip(String text, IconData icon) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -70,7 +68,6 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
     );
   }
 
-  // Helper: reusable comment tile
   Widget _buildCommentTile(String username, String comment) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -116,7 +113,7 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
     );
   }
 
-  // Add comment to Firestore
+  // Update comment to Firestore
   void _addComment() async {
     final String text = _commentController.text.trim();
     if (text.isEmpty) return;
@@ -193,7 +190,6 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
             const Divider(),
             const SizedBox(height: 16),
 
-            // Title and Status
             Text(
               '${location.floor}${_getFloorSuffix(location.floor)} Floor',
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -337,7 +333,7 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
             ),
             const SizedBox(height: 8),
 
-            // 🔥 Live Firestore comments
+            //  Live Firestore comments
             StreamBuilder<QuerySnapshot>(
               stream: _firestore
                   .collection('comments')

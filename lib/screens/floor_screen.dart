@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spotapot/screens/location_detail.dart';
 import 'package:spotapot/screens/loc_details.dart';
 import 'package:spotapot/screens/location_card.dart';
@@ -12,6 +13,7 @@ class FloorScreen extends StatefulWidget {
 
 class _FloorScreenState extends State<FloorScreen> {
   final List<LocationDetail> mockLocations = List.from(initialMockLocations);
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   String _query = '';
   final Set<String> _selectedFloors = {};
   final Set<String> _selectedGenders = {};
@@ -19,6 +21,43 @@ class _FloorScreenState extends State<FloorScreen> {
 
   final List<String> availableFloors = ['1', '2', '3'];
   final List<String> availableGenders = ['Male', 'Female'];
+
+  // Logout Function
+void _logout() async {
+  final shouldLogout = await showDialog<bool>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('Confirm Logout'),
+      content: const Text('Are you sure you want to log out?'),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context, false),
+          child: const Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(context, true),
+          child: const Text(
+            'Logout',
+            style: TextStyle(color: Colors.red),
+          ),
+        ),
+      ],
+    ),
+  );
+
+  if (shouldLogout == true) {
+    try {
+      await FirebaseAuth.instance.signOut();
+      if (!mounted) return;
+      Navigator.pushReplacementNamed(context, '/login');
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error logging out: $e')),
+      );
+    }
+  }
+}
+
 
   List<LocationDetail> get filtered {
     return mockLocations.where((loc) {
@@ -175,6 +214,14 @@ class _FloorScreenState extends State<FloorScreen> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.maybePop(context),
         ),
+        // logout button
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            tooltip: 'Logout',
+            onPressed: _logout,
+          ),
+        ],
       ),
       body: Stack(
         children: [
