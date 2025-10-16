@@ -91,11 +91,11 @@ final List<LocationDetail> initialMockLocations = [
     gender: 'Female',
     isOpen: true,
     rating: 4.7,
-    imagePath: 'assets/icons/3rd_right.JPG',
+    imagePath: 'assets/icons/3rd_floor.JPG',
     images: [
-      'assets/icons/3rd_right_cubicle1.JPG',
-      'assets/icons/3rd_right_faucet.JPG',
-      'assets/icons/3rd_right_cubicle2.JPG',
+      'assets/icons/3rd_floor_cubicle1.JPG',
+      'assets/icons/3rd_floor_faucet.JPG',
+      'assets/icons/3rd_floor_cubicle2.JPG',
     ],
   ),
 ];
