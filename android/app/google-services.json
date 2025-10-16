@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "92938933679",
+    "project_id": "spotapot-37f73",
+    "storage_bucket": "spotapot-37f73.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92938933679:android:52b0b285ad61f24ba94b5a",
+        "android_client_info": {
+          "package_name": "com.example.spotapot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzC5yTP_ytezVYsA7FMerVCRVqCnWutUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
